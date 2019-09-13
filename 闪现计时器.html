@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>闪现计时器</title>
+		<div>选择延迟</div>	
+		<input  type="radio" name="lx" value=5 checked="true" ><span>延迟5秒</span><input  type="radio" name="lx" value=15  ><span>延迟15秒</span><input  type="radio" name="lx" value=30  ><span>延迟30秒</span><input  type="radio" name="lx" value=45  ><span>延迟45秒</span>
+		<div>上路</div>
+		<button  onclick="main('top_sx')" id='top_sx'>闪现</button><button onclick="main('top_dr')" id='top_dr'>点燃</button><button onclick="main('top_cs')" id='top_cs'>传送</button>
+		<div>中路</div>
+		<button onclick="main('mid_sx')" id='mid_sx'>闪现</button><button onclick="main('mid_dr')" id='mid_dr'>燃/屏</button><button onclick="main('mid_zl')" id='mid_zl'>治疗</button>
+		<div>打野</div>
+		<button onclick="main('jug_sx')" id='jug_sx'>闪现</button>
+		<div>AD</div>
+		<button onclick="main('adc_sx')" id='adc_sx'>闪现</button><button onclick="main('adc_zl')" id='adc_zl'>治疗</button><button onclick="main('adc_dr')" id='adc_dr'>燃/屏</button><button onclick="main('adc_xr')" id='adc_xr'>虚/净</button>
+		<div>辅助</div>
+		<button onclick="main('sup_sx')" id='sup_sx'>闪现</button><button onclick="main('sup_zl')" id='sup_zl'>治疗</button><button onclick="main('sup_dr')" id='sup_dr'>燃/屏</button><button onclick="main('sup_xr')" id='sup_xr'>虚/净</button>
+	</head>
+	<body>
+			<style>
+		div{
+			font-size:19px;
+		}
+		span{
+			font-size:19px;
+		}		
+		button{
+			font-size:20px;
+			color:green;	
+			background-color: white;	
+			border-color: white;
+			margin:5px;
+			width:80px;
+			vertical-align:middle;
+   			text-align:center;
+		}
+	</style>
+	</body>
+
+	<script>
+			var lx =document.getElementsByName("lx");//获取模式的单选值
+			var top_skill =[] //依次存放技能的冷却cd
+			var mid_skill =[]
+			var jug_skill =[]
+			var adc_skill =[]
+			var sup_skill =[]
+			var lx_value_temp = 0 //存放模式的临时值
+			timer_top_sx = 0; //定时器标记
+			var dsq_top_sx //定时器返回值
+			timer_top_dr = 0; 
+			var dsq_top_dr 
+			timer_top_cs = 0; 
+			var dsq_top_cs
+			timer_mid_sx = 0; 
+			var dsq_mid_sx 
+			timer_mid_dr = 0; 
+			var dsq_mid_dr
+			timer_mid_zl = 0; 
+			var dsq_mid_zl
+			timer_jug_sx = 0; 
+			var dsq_jug_sx
+			timer_adc_sx = 0; 
+			var dsq_adc_sx 
+			timer_adc_dr = 0; 
+			var dsq_adc_dr
+			timer_adc_zl = 0; 
+			var dsq_adc_zl
+			timer_adc_xr = 0; 
+			var dsq_adc_xr
+			timer_sup_sx = 0; 
+			var dsq_sup_sx 
+			timer_sup_dr = 0; 
+			var dsq_sup_dr
+			timer_sup_zl = 0; 
+			var dsq_sup_zl
+			timer_sup_xr = 0; 
+			var dsq_sup_xr
+			
+			
+			
+			//倒计时
+			function clock(skill){
+				if(skill.id == 'top_sx'){
+					document.getElementById("top_sx").style.color='red'
+					if(top_skill[0] > 0){
+					document.getElementById('top_sx').innerHTML = top_skill[0]
+					top_skill[0]--
+					}else{
+					document.getElementById('top_sx').innerHTML ='闪现' //归零时重置
+					document.getElementById("top_sx").style.color='green'
+					clearInterval(dsq_top_sx) //停止定时器
+					timer_top_sx = 0;	//定时器标记				
+					}
+				}
+				if(skill.id == 'top_dr'){
+					document.getElementById("top_dr").style.color='red'
+					if(top_skill[1] > 0){
+					document.getElementById('top_dr').innerHTML = top_skill[1]
+					top_skill[1]--
+					}else{
+					document.getElementById('top_dr').innerHTML ='点燃'
+					document.getElementById("top_dr").style.color='green'
+					clearInterval(dsq_top_dr)
+					timer_top_dr = 0;					
+					}
+				}
+				if(skill.id == 'top_cs'){
+					document.getElementById("top_cs").style.color='red'
+					if(top_skill[2] > 0){
+					document.getElementById('top_cs').innerHTML = top_skill[2]
+					top_skill[2]--
+					}else{
+					document.getElementById('top_cs').innerHTML ='闪现' //归零时重置
+					document.getElementById("top_cs").style.color='green'
+					clearInterval(dsq_top_cs) //停止定时器
+					timer_top_cs = 0;	//定时器标记				
+					}
+				}
+				if(skill.id == 'mid_sx'){
+					document.getElementById("mid_sx").style.color='red'
+					if(mid_skill[0] > 0){
+					document.getElementById('mid_sx').innerHTML = mid_skill[0]
+					mid_skill[0]--
+					}else{
+					document.getElementById('mid_sx').innerHTML ='闪现'
+					document.getElementById("mid_sx").style.color='green'
+					clearInterval(dsq_mid_sx)
+					timer_mid_sx = 0;					
+					}
+				}
+				if(skill.id == 'mid_dr'){
+					document.getElementById("mid_dr").style.color='red'
+					if(mid_skill[1] > 0){
+					document.getElementById('mid_dr').innerHTML = mid_skill[1]
+					mid_skill[1]--
+					}else{
+					document.getElementById('mid_dr').innerHTML ='闪现'
+					document.getElementById("mid_dr").style.color='green'
+					clearInterval(dsq_mid_dr)
+					timer_mid_dr = 0;					
+					}
+				}
+				if(skill.id == 'mid_zl'){
+					document.getElementById("mid_zl").style.color='red'
+					if(mid_skill[2] > 0){
+					document.getElementById('mid_zl').innerHTML = mid_skill[2]
+					mid_skill[2]--
+					}else{
+					document.getElementById('mid_zl').innerHTML ='闪现'
+					document.getElementById("mid_zl").style.color='green'
+					clearInterval(dsq_mid_zl)
+					timer_mid_zl = 0;					
+					}
+				}
+				if(skill.id == 'jug_sx'){
+					document.getElementById("jug_sx").style.color='red'
+					if(jug_skill[0] > 0){
+					document.getElementById('jug_sx').innerHTML = mid_skill[0]
+					jug_skill[0]--
+					}else{
+					document.getElementById('jug_sx').innerHTML ='闪现'
+					document.getElementById("jug_sx").style.color='green'
+					clearInterval(dsq_jug_sx)
+					timer_jug_sx = 0;					
+					}
+				}
+				if(skill.id == 'adc_sx'){
+					document.getElementById("adc_sx").style.color='red'
+					if(adc_skill[0] > 0){
+					document.getElementById('adc_sx').innerHTML = adc_skill[0]
+					adc_skill[0]--
+					}else{
+					document.getElementById('adc_sx').innerHTML ='闪现'
+					document.getElementById("adc_sx").style.color='green'
+					clearInterval(dsq_adc_sx)
+					timer_adc_sx = 0;
+					}
+				}
+				if(skill.id == 'adc_zl'){
+					document.getElementById("adc_zl").style.color='red'
+					if(adc_skill[1] > 0){
+					document.getElementById('adc_zl').innerHTML = adc_skill[1]
+					adc_skill[1]--
+					}else{
+					document.getElementById('adc_zl').innerHTML ='闪现'
+					document.getElementById("adc_zl").style.color='green'
+					clearInterval(dsq_adc_zl)
+					timer_adc_zl = 0;
+					}
+				}
+				if(skill.id == 'adc_dr'){
+					document.getElementById("adc_dr").style.color='red'
+					if(adc_skill[2] > 0){
+					document.getElementById('adc_dr').innerHTML = adc_skill[2]
+					adc_skill[2]--
+					}else{
+					document.getElementById('adc_dr').innerHTML ='闪现'
+					document.getElementById("adc_dr").style.color='green'
+					clearInterval(dsq_adc_dr)
+					timer_adc_dr = 0;
+					}
+				}
+				if(skill.id == 'adc_xr'){
+					document.getElementById("adc_xr").style.color='red'
+					if(adc_skill[3] > 0){
+					document.getElementById('adc_xr').innerHTML = adc_skill[3]
+					adc_skill[3]--
+					}else{
+					document.getElementById('adc_xr').innerHTML ='闪现'
+					document.getElementById("adc_xr").style.color='green'
+					clearInterval(dsq_adc_xr)
+					timer_adc_xr = 0;
+					}
+				}
+								if(skill.id == 'sup_sx'){
+					document.getElementById("sup_sx").style.color='red'
+					if(sup_skill[0] > 0){
+					document.getElementById('sup_sx').innerHTML = sup_skill[0]
+					sup_skill[0]--
+					}else{
+					document.getElementById('sup_sx').innerHTML ='闪现'
+					document.getElementById("sup_sx").style.color='green'
+					clearInterval(dsq_sup_sx)
+					timer_sup_sx = 0;
+					}
+				}
+				if(skill.id == 'sup_zl'){
+					document.getElementById("sup_zl").style.color='red'
+					if(sup_skill[1] > 0){
+					document.getElementById('sup_zl').innerHTML = sup_skill[1]
+					sup_skill[1]--
+					}else{
+					document.getElementById('sup_zl').innerHTML ='闪现'
+					document.getElementById("sup_zl").style.color='green'
+					clearInterval(dsq_sup_zl)
+					timer_sup_zl = 0;
+					}
+				}
+				if(skill.id == 'sup_dr'){
+					document.getElementById("sup_dr").style.color='red'
+					if(sup_skill[2] > 0){
+					document.getElementById('sup_dr').innerHTML = sup_skill[2]
+					sup_skill[2]--
+					}else{
+					document.getElementById('sup_dr').innerHTML ='闪现'
+					document.getElementById("sup_dr").style.color='green'
+					clearInterval(dsq_sup_dr)
+					timer_sup_dr = 0;
+					}
+				}
+				if(skill.id == 'sup_xr'){
+					document.getElementById("sup_xr").style.color='red'
+					if(sup_skill[3] > 0){
+					document.getElementById('sup_xr').innerHTML = sup_skill[3]
+					sup_skill[3]--
+					}else{
+					document.getElementById('sup_xr').innerHTML ='闪现'
+					document.getElementById("sup_xr").style.color='green'
+					clearInterval(dsq_sup_xr)
+					timer_sup_xr = 0;
+					}
+				}
+
+
+
+				
+			}
+			
+			//主函数
+			function main(skill){
+				//获取模式值
+				for(var i=0;i<lx.length;i++){
+					if(lx[i].checked==true){
+						lx_value_temp=lx[i].value
+					}
+				}
+				if(skill =='top_sx'){
+					top_skill[0]=300-lx_value_temp //计算出闪现剩余时间并存放
+					if (!timer_top_sx) {
+		        		timer_top_sx = 1;//定时器标记 避免再次点击按钮重复调用
+		        		dsq_top_sx = setInterval('clock('+skill+')',1000) //定时器调用
+    				}
+				}
+				if(skill =='top_dr'){
+					top_skill[1]=180-lx_value_temp
+					if (!timer_top_dr) {
+		        		timer_top_dr = 1;
+		        		dsq_top_dr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='top_cs'){
+					top_skill[2]=360-lx_value_temp
+					if (!timer_top_cs) {
+		        		timer_top_cs = 1;
+		        		dsq_top_cs = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='mid_sx'){
+					mid_skill[0]=300-lx_value_temp
+					if (!timer_mid_sx) {
+		        		timer_mid_sx = 1;
+		        		dsq_mid_sx = setInterval('clock('+skill+')',1000)
+    				}
+				}	
+				if(skill =='mid_dr'){
+					mid_skill[1]=180-lx_value_temp
+					if (!timer_mid_dr) {
+		        		timer_mid_dr = 1;
+		        		dsq_mid_dr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='mid_zl'){
+					mid_skill[2]=240-lx_value_temp
+					if (!timer_mid_zl) {
+		        		timer_mid_zl = 1;
+		        		dsq_mid_zl = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='jug_sx'){
+					jug_skill[0]=300-lx_value_temp
+					if (!timer_jug_sx) {
+		        		timer_jug_sx = 1;
+		        		dsq_jug_sx = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='adc_sx'){
+					adc_skill[0]=300-lx_value_temp
+					if (!timer_adc_sx) {
+		        		timer_adc_sx = 1;
+		        		dsq_adc_sx = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='adc_zl'){
+					adc_skill[1]=240-lx_value_temp
+					if (!timer_adc_zl) {
+		        		timer_adc_zl = 1;
+		        		dsq_adc_zl = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='adc_dr'){
+					adc_skill[2]=180-lx_value_temp
+					if (!timer_adc_dr) {
+		        		timer_adc_dr = 1;
+		        		dsq_adc_dr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='adc_xr'){
+					adc_skill[3]=210-lx_value_temp
+					if (!timer_adc_xr) {
+		        		timer_adc_xr = 1;
+		        		dsq_adc_xr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='sup_sx'){
+					sup_skill[0]=300-lx_value_temp
+					if (!timer_sup_sx) {
+		        		timer_sup_sx = 1;
+		        		dsq_sup_sx = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='sup_zl'){
+					sup_skill[1]=240-lx_value_temp
+					if (!timer_sup_zl) {
+		        		timer_sup_zl = 1;
+		        		dsq_sup_zl = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='sup_dr'){
+					sup_skill[2]=180-lx_value_temp
+					if (!timer_sup_dr) {
+		        		timer_sup_dr = 1;
+		        		dsq_sup_dr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='sup_xr'){
+					sup_skill[3]=210-lx_value_temp
+					if (!timer_sup_xr) {
+		        		timer_sup_xr = 1;
+		        		dsq_sup_xr = setInterval('clock('+skill+')',1000)
+    				}
+				}
+			}
+	</script>
+</html>
