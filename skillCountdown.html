@@ -110,7 +110,7 @@
 					document.getElementById('top_cs').innerHTML = top_skill[2]
 					top_skill[2]--
 					}else{
-					document.getElementById('top_cs').innerHTML ='闪现' //归零时重置
+					document.getElementById('top_cs').innerHTML ='传送' //归零时重置
 					document.getElementById("top_cs").style.color='green'
 					clearInterval(dsq_top_cs) //停止定时器
 					timer_top_cs = 0;	//定时器标记				
@@ -134,7 +134,7 @@
 					document.getElementById('mid_dr').innerHTML = mid_skill[1]
 					mid_skill[1]--
 					}else{
-					document.getElementById('mid_dr').innerHTML ='闪现'
+					document.getElementById('mid_dr').innerHTML ='燃/屏'
 					document.getElementById("mid_dr").style.color='green'
 					clearInterval(dsq_mid_dr)
 					timer_mid_dr = 0;					
@@ -146,7 +146,7 @@
 					document.getElementById('mid_zl').innerHTML = mid_skill[2]
 					mid_skill[2]--
 					}else{
-					document.getElementById('mid_zl').innerHTML ='闪现'
+					document.getElementById('mid_zl').innerHTML ='治疗'
 					document.getElementById("mid_zl").style.color='green'
 					clearInterval(dsq_mid_zl)
 					timer_mid_zl = 0;					
@@ -182,7 +182,7 @@
 					document.getElementById('adc_zl').innerHTML = adc_skill[1]
 					adc_skill[1]--
 					}else{
-					document.getElementById('adc_zl').innerHTML ='闪现'
+					document.getElementById('adc_zl').innerHTML ='治疗'
 					document.getElementById("adc_zl").style.color='green'
 					clearInterval(dsq_adc_zl)
 					timer_adc_zl = 0;
@@ -194,7 +194,7 @@
 					document.getElementById('adc_dr').innerHTML = adc_skill[2]
 					adc_skill[2]--
 					}else{
-					document.getElementById('adc_dr').innerHTML ='闪现'
+					document.getElementById('adc_dr').innerHTML ='燃/屏'
 					document.getElementById("adc_dr").style.color='green'
 					clearInterval(dsq_adc_dr)
 					timer_adc_dr = 0;
@@ -206,13 +206,13 @@
 					document.getElementById('adc_xr').innerHTML = adc_skill[3]
 					adc_skill[3]--
 					}else{
-					document.getElementById('adc_xr').innerHTML ='闪现'
+					document.getElementById('adc_xr').innerHTML ='虚/净'
 					document.getElementById("adc_xr").style.color='green'
 					clearInterval(dsq_adc_xr)
 					timer_adc_xr = 0;
 					}
 				}
-								if(skill.id == 'sup_sx'){
+				if(skill.id == 'sup_sx'){
 					document.getElementById("sup_sx").style.color='red'
 					if(sup_skill[0] > 0){
 					document.getElementById('sup_sx').innerHTML = sup_skill[0]
@@ -230,7 +230,7 @@
 					document.getElementById('sup_zl').innerHTML = sup_skill[1]
 					sup_skill[1]--
 					}else{
-					document.getElementById('sup_zl').innerHTML ='闪现'
+					document.getElementById('sup_zl').innerHTML ='治疗'
 					document.getElementById("sup_zl").style.color='green'
 					clearInterval(dsq_sup_zl)
 					timer_sup_zl = 0;
@@ -242,7 +242,7 @@
 					document.getElementById('sup_dr').innerHTML = sup_skill[2]
 					sup_skill[2]--
 					}else{
-					document.getElementById('sup_dr').innerHTML ='闪现'
+					document.getElementById('sup_dr').innerHTML ='燃/屏'
 					document.getElementById("sup_dr").style.color='green'
 					clearInterval(dsq_sup_dr)
 					timer_sup_dr = 0;
@@ -254,7 +254,7 @@
 					document.getElementById('sup_xr').innerHTML = sup_skill[3]
 					sup_skill[3]--
 					}else{
-					document.getElementById('sup_xr').innerHTML ='闪现'
+					document.getElementById('sup_xr').innerHTML ='虚/净'
 					document.getElementById("sup_xr").style.color='green'
 					clearInterval(dsq_sup_xr)
 					timer_sup_xr = 0;
