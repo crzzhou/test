@@ -8,9 +8,9 @@
 		<div>上路</div>
 		<button  onclick="main('top_sx')" id='top_sx'>闪现</button><button onclick="main('top_dr')" id='top_dr'>点燃</button><button onclick="main('top_cs')" id='top_cs'>传送</button>
 		<div>中路</div>
-		<button onclick="main('mid_sx')" id='mid_sx'>闪现</button><button onclick="main('mid_dr')" id='mid_dr'>燃/屏</button><button onclick="main('mid_zl')" id='mid_zl'>治疗</button>
+		<button onclick="main('mid_sx')" id='mid_sx'>闪现</button><button onclick="main('mid_dr')" id='mid_dr'>燃/屏</button><button onclick="main('mid_zl')" id='mid_zl'>治疗</button><button onclick="main('mid_zy')" id='mid_zy'>中亚</button> 
 		<div>打野</div>
-		<button onclick="main('jug_sx')" id='jug_sx'>闪现</button>
+		<button onclick="main('jug_sx')" id='jug_sx'>闪现</button><button onclick="main('jug_zy')" id='jug_zy'>中亚</button> 
 		<div>AD</div>
 		<button onclick="main('adc_sx')" id='adc_sx'>闪现</button><button onclick="main('adc_zl')" id='adc_zl'>治疗</button><button onclick="main('adc_dr')" id='adc_dr'>燃/屏</button><button onclick="main('adc_xr')" id='adc_xr'>虚/净</button>
 		<div>辅助</div>
@@ -152,6 +152,18 @@
 					timer_mid_zl = 0;					
 					}
 				}
+				if(skill.id == 'mid_zy'){
+					document.getElementById("mid_zy").style.color='red'
+					if(jug_skill[3] > 0){
+					document.getElementById('mid_zy').innerHTML = mid_skill[3]
+					mid_skill[3]--
+					}else{
+					document.getElementById('mid_zy').innerHTML ='中亚'
+					document.getElementById("mid_zy").style.color='green'
+					clearInterval(dsq_mid_zy)
+					timer_mid_zy = 0;					
+					}
+				}
 				if(skill.id == 'jug_sx'){
 					document.getElementById("jug_sx").style.color='red'
 					if(jug_skill[0] > 0){
@@ -162,6 +174,18 @@
 					document.getElementById("jug_sx").style.color='green'
 					clearInterval(dsq_jug_sx)
 					timer_jug_sx = 0;					
+					}
+				}
+				if(skill.id == 'jug_zy'){
+					document.getElementById("jug_zy").style.color='red'
+					if(jug_skill[1] > 0){
+					document.getElementById('jug_zy').innerHTML = mid_skill[1]
+					jug_skill[1]--
+					}else{
+					document.getElementById('jug_zy').innerHTML ='中亚'
+					document.getElementById("jug_zy").style.color='green'
+					clearInterval(dsq_jug_zy)
+					timer_jug_zy = 0;					
 					}
 				}
 				if(skill.id == 'adc_sx'){
@@ -316,11 +340,25 @@
 		        		dsq_mid_zl = setInterval('clock('+skill+')',1000)
     				}
 				}
+				if(skill =='mid_zy'){
+					mid_skill[3]=120-lx_value_temp
+					if (!timer_mid_zy) {
+		        		timer_mid_zy = 1;
+		        		dsq_mid_zy = setInterval('clock('+skill+')',1000)
+    				}
+				}
 				if(skill =='jug_sx'){
 					jug_skill[0]=300-lx_value_temp
 					if (!timer_jug_sx) {
 		        		timer_jug_sx = 1;
 		        		dsq_jug_sx = setInterval('clock('+skill+')',1000)
+    				}
+				}
+				if(skill =='jug_zy'){
+					jug_skill[1]=120-lx_value_temp
+					if (!timer_jug_zy) {
+		        		timer_jug_zy = 1;
+		        		dsq_jug_zy = setInterval('clock('+skill+')',1000)
     				}
 				}
 				if(skill =='adc_sx'){
