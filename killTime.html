@@ -1,28 +1,31 @@
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" type="text/css" >
     <title>Progress bar</title>
+    
 	<style>
 		#c1{
 		    width: 100%;
+
 		    
 		}
 		#c2{
 		    width: 10%;
+
 		    background-color:blue;
 		    text-align: center;
 		    color: white;
-		    line-height:30px;
+		    line-height:3rem;
 		}
 		button{
-			font-size:20px;
+			font-size:1.5rem;
 			color:blue;	
 			background-color: white;	
 			border-color: white;
-			margin:5px;
-			margin-bottom: 30px;
-			width:80px;
+			margin:0.5rem;
+			height:5%;
+			margin-bottom: 3rem;
 			vertical-align:middle;
    			text-align:center;
 		}
@@ -31,10 +34,10 @@
 </head>
 <body>
 
-	<form>设置时间(分钟)：<input id = 'time' type="text" style="width: 20%"/>
+	<form style='font-size: 1.5rem;margin-top:15px;'>设置时间(分钟)：<input id = 'time' type="text" style="width: 20%;height:3%;font-size:1.5rem;"/>
 	</form>
 	<div style='float'>
-		<button onclick="start()"  style='width:30%'>开始</button>
+		<button onclick="start()"  style='width:20%' >开始</button>
 		<button onclick="reset()"  style='width:30%'>重置进度条</button>
 	</div>
 	<div id="c1">
